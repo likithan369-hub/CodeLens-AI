@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CodeLens AI — Intelligent Code Review</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app-layout">
+
+        <!-- ================= SIDEBAR ================= -->
+
+        <aside class="sidebar">
+
+            <div class="brand">
+                <div class="brand-icon">✦</div>
+
+                <div>
+                    <h2>CodeLens<span>AI</span></h2>
+                    <small>Developer Intelligence</small>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+
+                <a href="#" class="nav-item active">
+                    <span>⌂</span>
+                    Dashboard
+                </a>
+
+                <a href="#upload-card" class="nav-item">
+                    <span>↑</span>
+                    Review Code
+                </a>
+
+                <a href="#results" class="nav-item">
+                    <span>◈</span>
+                    Analysis Results
+                </a>
+
+            </nav>
+
+            <div class="sidebar-bottom">
+
+                <div class="engine-status">
+
+                    <span class="status-dot"></span>
+
+                    <div>
+                        <strong>AI Engine Online</strong>
+                        <small>Ready for analysis</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+        <!-- ================= MAIN CONTENT ================= -->
+
+        <main class="main-content">
+
+
+            <!-- TOP BAR -->
+
+            <header class="topbar">
+
+                <div>
+
+                    <p class="breadcrumb">
+                        Workspace / Code Review
+                    </p>
+
+                    <h1>
+                        Code Review Dashboard
+                    </h1>
+
+                </div>
+
+                <div class="topbar-right">
+
+                    <span class="version-badge">
+                        v1.0 Beta
+                    </span>
+
+                    <div class="avatar">
+                        AI
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- ================= HERO ================= -->
+
+            <section class="hero-dashboard">
+
+                <div>
+
+                    <span class="eyebrow">
+                        AI-POWERED DEVELOPMENT
+                    </span>
+
+                    <h2>
+                        Write better code.<br>
+                        Ship with confidence.
+                    </h2>
+
+                    <p>
+                        Upload your source code and receive intelligent feedback
+                        on bugs, security, performance, and maintainability.
+                    </p>
+
+                </div>
+
+
+                <div class="hero-decoration">
+
+                    <div class="floating-card">
+
+                        <span>AI Analysis</span>
+
+                        <strong>94%</strong>
+
+                        <small>
+                            Code health detected
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= UPLOAD WORKSPACE ================= -->
+
+            <section class="workspace-grid">
+
+
+                <!-- UPLOAD CARD -->
+
+                <div class="upload-card" id="upload-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <span class="card-label">
+                                SOURCE ANALYZER
+                            </span>
+
+                            <h3>
+                                Upload your code
+                            </h3>
+
+                        </div>
+
+                        <span class="secure-badge">
+                            🔒 Secure
+                        </span>
+
+                    </div>
+
+
+                    <div id="drop-area" class="upload-area">
+
+                        <div class="upload-icon-container">
+
+                            <div class="upload-icon">
+                                ↑
+                            </div>
+
+                        </div>
+
+
+                        <h2>
+                            Drop your source file here
+                        </h2>
+
+
+                        <p>
+                            or choose a file from your computer
+                        </p>
+
+
+                        <input
+                            type="file"
+                            id="file-input"
+                            accept=".py,.java,.js"
+                        >
+
+
+                        <label
+                            for="file-input"
+                            class="file-label"
+                        >
+                            Browse Files
+                        </label>
+
+
+                        <p class="supported-files">
+                            Python · Java · JavaScript
+                        </p>
+
+
+                        <p
+                            id="file-name"
+                            class="file-name"
+                        >
+                            No file selected
+                        </p>
+
+                    </div>
+
+
+                    <div class="upload-footer">
+
+                        <span>
+                            Maximum file size: 10 MB
+                        </span>
+
+                        <span>
+                            AI-powered static analysis
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        id="review-btn"
+                        class="review-btn"
+                        disabled
+                    >
+
+                        <span>
+                            Run AI Review
+                        </span>
+
+                        <span>
+                            →
+                        </span>
+
+                    </button>
+
+
+                    <p id="status"></p>
+
+                </div>
+
+
+                <!-- FEATURE PANEL -->
+
+                <div class="feature-panel">
+
+                    <span class="card-label">
+                        WHAT WE CHECK
+                    </span>
+
+                    <h3>
+                        Comprehensive analysis
+                    </h3>
+
+
+                    <div class="feature-list">
+
+
+                        <div class="feature-item">
+
+                            <div class="feature-icon red">
+                                🐛
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Bug Detection
+                                </strong>
+
+                                <p>
+                                    Identify potential runtime issues.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="feature-item">
+
+                            <div class="feature-icon orange">
+                                🔐
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Security Analysis
+                                </strong>
+
+                                <p>
+                                    Detect risky coding practices.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="feature-item">
+
+                            <div class="feature-icon purple">
+                                ⚡
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Performance Review
+                                </strong>
+
+                                <p>
+                                    Find inefficient code patterns.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="feature-item">
+
+                            <div class="feature-icon green">
+                                ✓
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Code Quality
+                                </strong>
+
+                                <p>
+                                    Improve readability and structure.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= RESULTS ================= -->
+
+            <section
+                id="results"
+                class="results hidden"
+            >
+
+
+                <!-- SOURCE CODE PREVIEW -->
+
+                <div class="code-preview-card">
+
+                    <div class="code-preview-header">
+
+                        <div>
+
+                            <span class="card-label">
+                                SOURCE CODE
+                            </span>
+
+                            <h3 id="preview-filename">
+                                Uploaded File
+                            </h3>
+
+                        </div>
+
+
+                        <span
+                            id="preview-language"
+                            class="language-badge"
+                        >
+                            Code
+                        </span>
+
+                    </div>
+
+
+                    <pre id="source-code-preview">// Your uploaded source code will appear here.</pre>
+
+                </div>
+
+
+                <!-- RESULTS HEADER -->
+
+                <div class="results-header">
+
+                    <div>
+
+                        <span class="card-label">
+                            ANALYSIS COMPLETE
+                        </span>
+
+                        <h2>
+                            Review Results
+                        </h2>
+
+                    </div>
+
+
+                    <span class="completed-badge">
+                        ✓ Completed
+                    </span>
+
+                </div>
+
+
+                <!-- ================= STATS ================= -->
+
+                <div class="stats-grid">
+
+
+                    <div class="stat-card">
+
+                        <span class="stat-icon">
+                            📄
+                        </span>
+
+                        <small>
+                            File Analyzed
+                        </small>
+
+                        <strong id="result-filename">
+                            --
+                        </strong>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <span class="stat-icon">
+                            ⌘
+                        </span>
+
+                        <small>
+                            Total Lines
+                        </small>
+
+                        <strong id="total-lines">
+                            --
+                        </strong>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <span class="stat-icon">
+                            ⚠
+                        </span>
+
+                        <small>
+                            Issues Found
+                        </small>
+
+                        <strong id="issues-count">
+                            --
+                        </strong>
+
+                    </div>
+
+
+                    <div class="stat-card score-stat">
+
+                        <span class="stat-icon">
+                            ✦
+                        </span>
+
+                        <small>
+                            Quality Score
+                        </small>
+
+                        <strong>
+
+                            <span id="score">
+                                --
+                            </span>
+
+                            <em>
+                                /100
+                            </em>
+
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- ================= SCORE + SUMMARY ================= -->
+
+                <div class="overview-grid">
+
+
+                    <!-- SCORE -->
+
+                    <div class="score-panel">
+
+                        <span class="card-label">
+                            OVERALL HEALTH
+                        </span>
+
+
+                        <div class="score-ring">
+
+                            <div class="score-ring-inner">
+
+                                <strong id="score-ring-value">
+                                    --
+                                </strong>
+
+                                <span>
+                                    / 100
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <p>
+                            AI-generated code quality assessment
+                        </p>
+
+                    </div>
+
+
+                    <!-- SUMMARY -->
+
+                    <div class="summary-panel">
+
+                        <span class="card-label">
+                            AI SUMMARY
+                        </span>
+
+                        <h3>
+                            Review Overview
+                        </h3>
+
+
+                        <p id="summary">
+                            Your analysis summary will appear here.
+                        </p>
+
+
+                        <div class="summary-line"></div>
+
+
+                        <div class="summary-footer">
+
+                            <span>
+                                Powered by Gemini AI
+                            </span>
+
+                            <span>
+                                ✦
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= DETAILED INSIGHTS ================= -->
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <span class="card-label">
+                            DETAILED INSIGHTS
+                        </span>
+
+                        <h3>
+                            Code Analysis
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <!-- REVIEW GRID -->
+
+                <div class="review-grid">
+
+
+                    <!-- BUGS -->
+
+                    <div class="review-card bugs-card">
+
+                        <div class="review-card-header">
+
+                            <h3>
+                                🐛 Bugs
+                            </h3>
+
+                            <span class="category-badge danger">
+                                Issues
+                            </span>
+
+                        </div>
+
+                        <div id="bugs"></div>
+
+                    </div>
+
+
+                    <!-- SECURITY -->
+
+                    <div class="review-card security-card">
+
+                        <div class="review-card-header">
+
+                            <h3>
+                                🔐 Security
+                            </h3>
+
+                            <span class="category-badge warning">
+                                Security
+                            </span>
+
+                        </div>
+
+                        <div id="security"></div>
+
+                    </div>
+
+
+                    <!-- PERFORMANCE -->
+
+                    <div class="review-card performance-card">
+
+                        <div class="review-card-header">
+
+                            <h3>
+                                ⚡ Performance
+                            </h3>
+
+                            <span class="category-badge purple">
+                                Optimization
+                            </span>
+
+                        </div>
+
+                        <div id="performance"></div>
+
+                    </div>
+
+
+                    <!-- CODE QUALITY -->
+
+                    <div class="review-card quality-card">
+
+                        <div class="review-card-header">
+
+                            <h3>
+                                📝 Code Quality
+                            </h3>
+
+                            <span class="category-badge success">
+                                Quality
+                            </span>
+
+                        </div>
+
+                        <div id="code-quality"></div>
+
+                    </div>
+
+
+                    <!-- MAINTAINABILITY -->
+
+                    <div class="review-card maintainability-card">
+
+                        <div class="review-card-header">
+
+                            <h3>
+                                🔧 Maintainability
+                            </h3>
+
+                            <span class="category-badge info">
+                                Structure
+                            </span>
+
+                        </div>
+
+                        <div id="maintainability"></div>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- ================= SUGGESTIONS ================= -->
+
+                <div class="suggestions-card">
+
+                    <div class="review-card-header">
+
+                        <div>
+
+                            <span class="card-label">
+                                RECOMMENDED ACTIONS
+                            </span>
+
+                            <h3>
+                                💡 Improvement Suggestions
+                            </h3>
+
+                        </div>
+
+
+                        <span class="suggestion-count">
+                            AI Generated
+                        </span>
+
+                    </div>
+
+
+                    <div id="suggestions"></div>
+
+                </div>
+
+
+            </section>
+
+
+        </main>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
