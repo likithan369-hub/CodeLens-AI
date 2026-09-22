@@ -1,11 +1,18 @@
-ALLOWED_EXTENSIONS = [".py", ".java", ".js"]
+from pathlib import Path
 
 
-def validate_file_extension(filename):
+ALLOWED_EXTENSIONS = {".py", ".java", ".js"}
 
-    for extension in ALLOWED_EXTENSIONS:
 
-        if filename.endswith(extension):
-            return True
+def validate_file_extension(filename: str) -> bool:
+    """
+    Validate whether the uploaded file has an allowed source-code extension.
+    """
 
-    return False
+    if not filename:
+        return False
+
+    filename = filename.strip()
+    extension = Path(filename).suffix.lower()
+
+    return extension in ALLOWED_EXTENSIONS
