@@ -213,6 +213,8 @@ function displayResults(data) {
 
     const review = data.gemini_review || {};
 
+    const geminiUnavailable = Boolean(review.error);
+
     const analysis = data.analysis || {};
 
     const sourceCode = data.source_code || "";
@@ -262,9 +264,10 @@ function displayResults(data) {
     // ===============================
     // SCORE
     // ===============================
-
-    const score =
-        Number(review.score) || 0;
+    
+    const score = geminiUnavailable
+    ? "--"
+    : Number(review.score) || 0;
 
 
     const scoreElement =
@@ -311,9 +314,9 @@ function displayResults(data) {
 
     if (summary) {
 
-        summary.textContent =
-            review.summary ||
-            "No summary available.";
+        summary.textContent = geminiUnavailable
+            ? "Gemini AI review is temporarily unavailable. Static analysis results are still available."
+            : review.summary || "No summary available.";
     }
 
 
