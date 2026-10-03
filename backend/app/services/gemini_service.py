@@ -3,11 +3,17 @@ import os
 import json
 from dotenv import load_dotenv
 
+
 load_dotenv()
 
-client = genai.Client(
-    api_key=os.getenv("GEMINI_API_KEY")
-)
+
+API_KEY = os.getenv("GEMINI_API_KEY")
+
+if not API_KEY:
+    raise ValueError("GEMINI_API_KEY is not configured.")
+
+
+client = genai.Client(api_key=API_KEY)
 
 
 def generate_ai_review(code):
@@ -70,15 +76,42 @@ Source code:
 {code}
 """
 
-    interaction = client.interactions.create(
-        model="gemini-3.5-flash-lite",
-        input=prompt
-    )
-
-    response_text = interaction.output_text.strip()
-
     try:
-        return json.loads(response_text)
+        interaction = client.interactions.create(
+            model="gemini-3.5-flash-lite",
+            input=prompt
+        )
+
+        response_text = interaction.output_text.strip()
+
+        # Remove accidental markdown code fences
+        if response_text.startswith("```"):
+            response_text = response_text.replace("```json", "", 1)
+            response_text = response_text.replace("```", "", 1)
+            response_text = response_text.strip()
+
+        review = json.loads(response_text)
+
+        # Ensure the expected fields exist
+        required_fields = [
+            "summary",
+            "bugs",
+            "security",
+            "performance",
+            "code_quality",
+            "maintainability",
+            "suggestions",
+            "score"
+        ]
+
+        for field in required_fields:
+            if field not in review:
+                review[field] = [] if field != "summary" and field != "score" else (
+                    "" if field == "summary" else 0
+                )
+
+        return review
+
     except json.JSONDecodeError:
         return {
             "summary": "Gemini returned an invalid structured response.",
@@ -88,6 +121,18 @@ Source code:
             "code_quality": [],
             "maintainability": [],
             "suggestions": [],
+            "score": 0
+        }
+
+    except Exception as error:
+        return {
+            "summary": "Unable to generate AI review at this time.",
+            "bugs": [],
+            "security": [],
+            "performance": [],
+            "code_quality": [],
+            "maintainability": [],
+            "suggestions": [],
             "score": 0,
-            "raw_response": response_text
+            "error": str(error)
         }
